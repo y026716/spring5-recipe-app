@@ -35,6 +35,7 @@ public class RecipeServiceImpl implements RecipeService {
         return recipes;
     }
 
+    @Override
     public Recipe findById(Long l) {
 
         Optional<Recipe> recipeOptional = recipeRepository.findById(l);
@@ -44,6 +45,12 @@ public class RecipeServiceImpl implements RecipeService {
         }
 
         return recipeOptional.get();
+    }
+
+    @Override
+    @Transactional
+    public RecipeCommand findCommandById(Long id) {
+        return recipeToRecipeCommand.convert(findById(id));
     }
 
     @Override
