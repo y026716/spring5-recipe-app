@@ -65,4 +65,11 @@ public class RecipeServiceImpl implements RecipeService {
 
         return savedRecipe;
     }
+
+    @Override
+    @Transactional
+    public void deleteById(Long id) {
+        recipeRepository.deleteById(id);
+
+    }
 }
