@@ -51,7 +51,7 @@ public class RecipeController {
 
     @GetMapping
     @RequestMapping("recipe/{id}/delete")
-    public String deleteById(@PathVariable String id, Model model) {
+    public String deleteById(@PathVariable String id) {
 
         log.debug("Deleting id: "+ id);
 
