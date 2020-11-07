@@ -2,10 +2,7 @@
 #
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
-version: 2.1
-orbs:
-  codecov: codecov/codecov@1.0.2
-
+version: 2
 jobs:
   build:
     docker:
@@ -26,9 +23,6 @@ jobs:
     steps:
       - checkout
 
-      - codecov/upload:
-            file: { { target/surefire-reports } }
-
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -42,8 +36,6 @@ jobs:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
-
-
 
       # run tests! and gen code coverage
       - run: mvn integration-test cobertura:cobertura
