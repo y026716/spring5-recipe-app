@@ -37,12 +37,23 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
-      # run tests! and gen code coverage
-      - run: mvn integration-test cobertura:cobertura
 
-      - store_test_results:
-          path: target/surefire-reports
+version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.2
+jobs:
+  build:
+    steps:
+      - codecov/upload:
+          file: {{ coverage_report_filepath }}
 
-      - run:
-          name: Send to CodeCov
-          command: bash <(curl -s https://codecov.io/bash)
+
+#      # run tests! and gen code coverage
+#      - run: mvn integration-test cobertura:cobertura
+#
+#      - store_test_results:
+#          path: target/surefire-reports
+#
+#      - run:
+#          name: Send to CodeCov
+#          command: bash <(curl -s https://codecov.io/bash)
